@@ -2,7 +2,7 @@ from prefect import flow, task
 from prefect.task_runners import SequentialTaskRunner
 import fsspec
 
-import pandas as pd
+
 import requests
 from requests.auth import HTTPBasicAuth
 import json
