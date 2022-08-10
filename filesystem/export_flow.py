@@ -62,8 +62,7 @@ def make_api_call(start_index):
         headers = {
             "Accept": "application/vnd.mediahaven.v2+json"
         }
-        secret_block = Secret.load("mhapi-prd-viaa-password")
-        response = requests.request("GET", url, data=payload, headers=headers, params=querystring, verify=False, auth=HTTPBasicAuth('viaa@viaa', secret_block.get()))
+        response = requests.request("GET", url, data=payload, headers=headers, params=querystring, verify=False, auth=HTTPBasicAuth('viaa@viaa', Secret.load("mhapi-prd-viaa-password").get()))
         
         # print(response.text)
         parsed = json.loads(response.text)
