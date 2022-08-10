@@ -3,7 +3,7 @@
 ###
 name: export-deployment
 description: null
-version: aba7eb41b754622e2b6431673fd5b175
+version: 88902335f2bfab2c4cb29138c0094142
 tags:
 - test
 parameters: {}
@@ -26,8 +26,8 @@ manifest_path: export_flow-manifest.json
 storage:
   basepath: github://lennertvandevelde/prefect_test
   _is_anonymous: true
-  _block_document_name: anonymous-36956962-062e-410a-ab1c-6b148698d63a
-  _block_document_id: b565600f-c613-4c68-aae0-0597951e5c70
+  _block_document_name: github-test
+  _block_document_id: b1ec7c07-b988-4343-a3a6-d9507fefa314
   _block_type_slug: remote-file-system
 parameter_openapi_schema:
   title: Parameters
