@@ -62,7 +62,7 @@ def make_api_call(start_index):
         headers = {
             "Accept": "application/vnd.mediahaven.v2+json"
         }
-
+        secret_block = Secret.load("mhapi-prd-viaa-password")
         response = requests.request("GET", url, data=payload, headers=headers, params=querystring, verify=False, auth=HTTPBasicAuth('viaa@viaa', secret_block.get()))
         
         # print(response.text)
@@ -108,7 +108,6 @@ fieldnames = ["PID", "FragmentId", "Title", "Description", "dc_identifier_locali
 writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
 writer.writeheader()
 
-secret_block = Secret.load("mhapi-prd-viaa-password")
 
 
 
