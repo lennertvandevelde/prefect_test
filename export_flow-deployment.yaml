@@ -1,0 +1,37 @@
+###
+### A complete description of a Prefect Deployment for flow 'export_flow'
+###
+name: export-deployment
+description: null
+version: aba7eb41b754622e2b6431673fd5b175
+tags:
+- test
+parameters: {}
+schedule: null
+infrastructure:
+  type: process
+  env: {}
+  labels: {}
+  name: null
+  command:
+  - python
+  - -m
+  - prefect.engine
+  stream_output: true
+###
+### DO NOT EDIT BELOW THIS LINE
+###
+flow_name: export_flow
+manifest_path: export_flow-manifest.json
+storage:
+  basepath: github://lennertvandevelde/prefect_test
+  _is_anonymous: true
+  _block_document_name: anonymous-36956962-062e-410a-ab1c-6b148698d63a
+  _block_document_id: b565600f-c613-4c68-aae0-0597951e5c70
+  _block_type_slug: remote-file-system
+parameter_openapi_schema:
+  title: Parameters
+  type: object
+  properties: {}
+  required: null
+  definitions: null
