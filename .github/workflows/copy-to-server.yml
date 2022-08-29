@@ -12,7 +12,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - run: source /home/prefect/env/bin/activate
-      - run: prefect deployment build export_flow.py:export_flow -n ${{ github.repository }} -q test
+      - run: prefect deployment build export_flow.py:export_flow -n ${{ github.repository }}
       - run: prefect deployment apply export_flow-deployment.yaml
 
 
