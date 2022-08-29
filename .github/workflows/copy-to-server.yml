@@ -9,7 +9,7 @@ jobs:
       - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
       - run : echo "$PWD"
       - run: source /home/prefect/env/bin/activate
-      - run: prefect deployment build export_flow.py:export_flow -n ${{ github.repository }}
+      - run: prefect deployment build export_flow.py:export_flow -n export_flow
       - run: prefect deployment apply export_flow-deployment.yaml
 
 
