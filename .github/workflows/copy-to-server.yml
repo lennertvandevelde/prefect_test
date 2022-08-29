@@ -1,16 +1,13 @@
 name: Copy To Server
 on: [push]
 jobs:
-  Clone-Flow-Code-Repository:
+  Build-Prefect-Deployment:
     runs-on: self-hosted
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
       - run: echo "The ${{ github.repository }} repository has been cloned to the runner."
       - run : echo "$PWD"
-  Build-Prefect-Deployment:
-    runs-on: self-hosted
-    steps:
       - run: source /home/prefect/env/bin/activate
       - run: prefect deployment build export_flow.py:export_flow -n ${{ github.repository }}
       - run: prefect deployment apply export_flow-deployment.yaml
