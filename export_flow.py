@@ -1,3 +1,4 @@
+from typing import List
 from prefect import flow, task
 from prefect.task_runners import SequentialTaskRunner
 import fsspec
@@ -8,6 +9,7 @@ from requests.auth import HTTPBasicAuth
 import json
 import csv
 from prefect.blocks.system import Secret
+from prefect.utilities.annotations import unmapped
 
 
 # from prefect_dask.task_runners import DaskTaskRunner
@@ -71,7 +73,7 @@ def make_api_call(start_index):
         return parsed
         
 @flow(name="export_flow")
-def export_flow(fieldnames):
+def export_flow(fieldnames: List[str]):
     print(type(fieldnames))
     csvfile=open('/home/lennert/prefect_test/test.csv', 'w')
     # csvfile.write("\t".join(fieldnames) + "\n")
@@ -81,7 +83,7 @@ def export_flow(fieldnames):
     # start_index = 0
     # total_nr_of_results = float("inf")
     # parsed = make_api_call.submit(start_index)
-    # rows = write_record.map(parsed.result()["MediaDataList"], fieldnames, writer)
+    # rows = write_record.map(parsed.result()["MediaDataList"], unmapped(fieldnames), writer)
     # for row in rows:
     #     if row.result():
     #         writer.writerow(row.result())
