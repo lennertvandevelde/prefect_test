@@ -73,7 +73,7 @@ def make_api_call(start_index):
         return parsed
         
 @flow(name="export_flow")
-def export_flow(fieldnames: List[str]):
+def export_flow(fieldnames: json):
     print(type(fieldnames))
     csvfile=open('/home/lennert/prefect_test/test.csv', 'w')
     # csvfile.write("\t".join(fieldnames) + "\n")
