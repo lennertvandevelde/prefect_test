@@ -27,7 +27,7 @@ def ie_classification(record):
         return False
 
 @task
-def write_record(record, fieldnames):
+def write_record(record, fieldnames, writer):
     if ie_classification(record):
         row = {}
         for field in fieldnames:
@@ -71,10 +71,13 @@ def make_api_call(start_index):
         
 @flow(name="export_flow")
 def export_flow(fieldnames):
+    csvfile=open('test.csv', 'w')
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
     start_index = 0
     total_nr_of_results = float("inf")
     parsed = make_api_call.submit(start_index)
-    write_record.map(parsed.result()["MediaDataList"], fieldnames)
+    write_record.map(parsed.result()["MediaDataList"], fieldnames, writer)
     total_nr_of_results = parsed.result()["TotalNrOfResults"]
     max_start_index = int(total_nr_of_results / 25)
     print(max_start_index)
@@ -93,7 +96,7 @@ def export_flow(fieldnames):
 
         # for record in parsed.result()["MediaDataList"]:
         for api_call_result in parseds:
-            write_record.map(api_call_result.result()["MediaDataList"])
+            write_record.map(api_call_result.result()["MediaDataList"], fieldnames)
         #     if row:
         #         rows.append(row.result())
         # for row in rows:
@@ -102,10 +105,8 @@ def export_flow(fieldnames):
 
 print("HI")
 
-csvfile=open('test.csv', 'w')
 fieldnames = ["PID", "FragmentId", "Title", "dc_identifier_localid", "dc_rights_licenses", "dc_identifier_localids"]
-writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-writer.writeheader()
+
 
 
 
