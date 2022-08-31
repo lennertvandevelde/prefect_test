@@ -81,7 +81,7 @@ def export_flow(fieldnames):
     parsed = make_api_call.submit(start_index)
     rows = write_record.map(parsed.result()["MediaDataList"], fieldnames, writer)
     for row in rows:
-        writer.writerow(row)
+        writer.writerow(row.result())
     total_nr_of_results = parsed.result()["TotalNrOfResults"]
     max_start_index = int(total_nr_of_results / 25)
     print(max_start_index)
