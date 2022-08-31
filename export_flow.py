@@ -30,7 +30,7 @@ def ie_classification(record):
 
 @task
 def write_record(record, fieldnames):
-    print(record)
+    # print(record)
     if ie_classification(record):
         row = {}
         for field in fieldnames:
@@ -90,29 +90,29 @@ def export_flow(fieldnames: str):
             print(row.result())
             writer.writerow(row.result())
         # writer.writerow(row.result())
-    total_nr_of_results = parsed.result()["TotalNrOfResults"]
-    max_start_index = int(total_nr_of_results / 25)
-    print(max_start_index)
-    # while start_index < total_nr_of_results:
-        # if start_index == 100:
-        #     break
-    start_indeces = range(25, max_start_index*25+25, 125)
-    for i in start_indeces:
-        parseds = make_api_call.map(range(i, i+125, 25))
-        # print(parsed)
+    # total_nr_of_results = parsed.result()["TotalNrOfResults"]
+    # max_start_index = int(total_nr_of_results / 25)
+    # print(max_start_index)
+    # # while start_index < total_nr_of_results:
+    #     # if start_index == 100:
+    #     #     break
+    # start_indeces = range(25, max_start_index*25+25, 125)
+    # for i in start_indeces:
+    #     parseds = make_api_call.map(range(i, i+125, 25))
+    #     # print(parsed)
         
         
-        # print(json.dumps(parsed, indent=4, sort_keys=True))
+    #     # print(json.dumps(parsed, indent=4, sort_keys=True))
 
-        # print(parsed["MediaDataList"])
+    #     # print(parsed["MediaDataList"])
 
-        # for record in parsed.result()["MediaDataList"]:
-        for api_call_result in parseds:
-            write_record.map(api_call_result.result()["MediaDataList"], )
-        #     if row:
-        #         rows.append(row.result())
-        # for row in rows:
-        #     writer.writerow(row)
+    #     # for record in parsed.result()["MediaDataList"]:
+    #     for api_call_result in parseds:
+    #         write_record.map(api_call_result.result()["MediaDataList"], )
+    #     #     if row:
+    #     #         rows.append(row.result())
+    #     # for row in rows:
+    #     #     writer.writerow(row)
     csvfile.close() 
 
 print("HI")
