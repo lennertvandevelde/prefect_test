@@ -30,7 +30,7 @@ def ie_classification(record):
 
 @task
 def write_record(record, fieldnames):
-    # print(record)
+    print(record)
     if ie_classification(record):
         row = {}
         for field in fieldnames:
@@ -117,7 +117,7 @@ def export_flow(fieldnames: str):
 
 print("HI")
 
-fieldnames = ["PID", "FragmentId", "Title", "dc_identifier_localid", "dc_rights_licenses", "dc_identifier_localids"]
+fieldnames ={"fields":["PID", "FragmentId", "Title", "dc_identifier_localid", "dc_rights_licenses", "dc_identifier_localids"]}	
 
 
 
