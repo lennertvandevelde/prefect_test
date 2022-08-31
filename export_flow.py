@@ -30,11 +30,12 @@ def ie_classification(record):
 
 @task
 def write_record(record, fieldnames):
-    print(record)
+    print(record["Dynamic"]["PID"])
     if ie_classification(record):
         row = {}
         for field in fieldnames:
             for key in record:
+                print(key)
                 if field in record[key]:
                     print(field)
                     print(record[key][field])
