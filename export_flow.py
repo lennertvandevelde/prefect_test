@@ -30,8 +30,8 @@ def ie_classification(record):
 
 @task
 def write_record(record, fieldnames):
-    print(record["Dynamic"])
-    print(record["Dynamic"]["PID"])
+    # print(record["Dynamic"])
+    # print(record["Dynamic"]["PID"])
 
     if ie_classification(record):
         row = {}
@@ -39,8 +39,8 @@ def write_record(record, fieldnames):
             for key in record:
                 # print(key)
                 if field in record[key]:
-                    print(field)
-                    print(record[key][field])
+                    # print(field)
+                    # print(record[key][field])
                     if record[key][field]:
                         if type(record[key][field]) is str:
                             row.update({field:   str(record[key][field]).replace("\n", "")})
@@ -87,7 +87,7 @@ def export_flow(fieldnames: str):
     start_index = 0
     total_nr_of_results = float("inf")
     parsed = make_api_call.submit(start_index)
-    rows = write_record.map(parsed.result()["MediaDataList"], unmapped(fieldnames))
+    rows = write_record.map(parsed.result()["MediaDataList"], unmapped(fields))
     for row in rows:
         if row.result():
             print(row.result())
