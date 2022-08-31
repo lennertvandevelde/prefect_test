@@ -46,8 +46,8 @@ def write_record(record, fieldnames):
                                 value +=  (key2 + ":" + str(record[key][field][key2])).replace("\n", "").replace(",", ";").replace("[", "").replace("]", "") +" "
                             row.update({field: value})
                         # row.update({field: str(record[key][field]).replace("\n", "").replace(",", ";")})
-        print(row)
-        # writer.writerow(row)
+        # print(row)
+        writer.writerow(row)
     #     return row
     # else:
     #     return None
