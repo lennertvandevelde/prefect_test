@@ -59,10 +59,10 @@ def write_record(record, fieldnames):
         return None
 
 @task
-def make_api_call(start_index):
+def make_api_call(start_index, cp_id):
         url = "https://archief.viaa.be/mediahaven-rest-api/resources/media"
 
-        querystring = {"q":"+(CP_id:OR-8s4jn9m)", "startIndex": start_index}
+        querystring = {"q":f"+(CP_id:{cp_id})", "startIndex": start_index}
 
         payload = ""
         headers = {
@@ -76,7 +76,7 @@ def make_api_call(start_index):
         return parsed
         
 @flow(name="export_flow")
-def export_flow(fieldnames: str):
+def export_flow(fieldnames: str, cp_id: str):
     # print(type(fieldnames))
     fields = json.loads(fieldnames)["fields"]
     csvfile=open('/home/lennert/prefect_test/test.csv', 'w')
@@ -86,7 +86,7 @@ def export_flow(fieldnames: str):
     writer.writeheader()
     start_index = 0
     total_nr_of_results = float("inf")
-    parsed = make_api_call.submit(start_index)
+    parsed = make_api_call.submit(start_index, cp_id)
     rows = write_record.map(parsed.result()["MediaDataList"], unmapped(fields))
     for row in rows:
         if row.result():
@@ -101,7 +101,7 @@ def export_flow(fieldnames: str):
         #     break
     start_indeces = range(25, max_start_index*25+25, 125)
     for i in start_indeces:
-        parseds = make_api_call.map(range(i, i+125, 25))
+        parseds = make_api_call.map(range(i, i+125, 25), cp_id)
         # print(parsed)
         
         
