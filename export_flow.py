@@ -73,10 +73,10 @@ def make_api_call(start_index):
 @flow(name="export_flow")
 def export_flow(fieldnames):
     csvfile=open('/home/lennert/prefect_test/test.csv', 'w')
-    csvfile.write("\t".join(fieldnames) + "\n")
-    # print(os.path.abspath(csvfile.name))
-    # writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-    # writer.writeheader()
+    # csvfile.write("\t".join(fieldnames) + "\n")
+    print(os.path.abspath(csvfile.name))
+    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer.writeheader()
     # start_index = 0
     # total_nr_of_results = float("inf")
     # parsed = make_api_call.submit(start_index)
