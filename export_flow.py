@@ -101,7 +101,7 @@ def export_flow(fieldnames):
         #         rows.append(row.result())
         # for row in rows:
         #     writer.writerow(row)
-
+    csvfile.close() 
 
 print("HI")
 
@@ -115,4 +115,4 @@ if __name__ == '__main__':
 
     export_flow()
 
-csvfile.close()
+
