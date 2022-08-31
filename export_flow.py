@@ -36,8 +36,8 @@ def write_record(record, fieldnames):
         for field in fieldnames:
             for key in record:
                 if field in record[key]:
-                    # print(field)
-                    # print(record[key][field])
+                    print(field)
+                    print(record[key][field])
                     if record[key][field]:
                         if type(record[key][field]) is str:
                             row.update({field:   str(record[key][field]).replace("\n", "")})
