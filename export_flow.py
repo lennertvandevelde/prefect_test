@@ -47,10 +47,10 @@ def write_record(record, fieldnames, writer):
                             row.update({field: value})
                         # row.update({field: str(record[key][field]).replace("\n", "").replace(",", ";")})
         # print(row)
-        writer.writerow(row)
-    #     return row
-    # else:
-    #     return None
+        # writer.writerow(row)
+        return row
+    else:
+        return None
 
 @task
 def make_api_call(start_index):
@@ -78,7 +78,8 @@ def export_flow(fieldnames):
     start_index = 0
     total_nr_of_results = float("inf")
     parsed = make_api_call.submit(start_index)
-    write_record.map(parsed.result()["MediaDataList"], fieldnames, writer)
+    row = write_record.map(parsed.result()["MediaDataList"], fieldnames, writer)
+    writer.writerow(row)
     total_nr_of_results = parsed.result()["TotalNrOfResults"]
     max_start_index = int(total_nr_of_results / 25)
     print(max_start_index)
