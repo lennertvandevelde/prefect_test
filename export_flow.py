@@ -31,6 +31,8 @@ def ie_classification(record):
 @task
 def write_record(record, fieldnames):
     print(record["Dynamic"])
+    print(record["Dynamic"]["PID"])
+
     if ie_classification(record):
         row = {}
         for field in fieldnames:
