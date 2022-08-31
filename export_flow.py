@@ -79,7 +79,7 @@ def export_flow(fieldnames: str):
     csvfile=open('/home/lennert/prefect_test/test.csv', 'w')
     # csvfile.write("\t".join(fieldnames) + "\n")
     print(os.path.abspath(csvfile.name))
-    writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
+    writer = csv.DictWriter(csvfile, fieldnames=fields)
     writer.writeheader()
     # start_index = 0
     # total_nr_of_results = float("inf")
