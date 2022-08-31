@@ -2,7 +2,7 @@ from prefect import flow, task
 from prefect.task_runners import SequentialTaskRunner
 import fsspec
 
-
+import os
 import requests
 from requests.auth import HTTPBasicAuth
 import json
@@ -72,6 +72,7 @@ def make_api_call(start_index):
 @flow(name="export_flow")
 def export_flow(fieldnames):
     csvfile=open('test.csv', 'w')
+    print(os.path.abspath(csvfile.name))
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
     start_index = 0
