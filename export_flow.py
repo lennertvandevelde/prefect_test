@@ -29,7 +29,7 @@ def ie_classification(record):
         return False
 
 @task
-def write_record(record, fieldnames, writer):
+def write_record(record, fieldnames):
     print(record)
     if ie_classification(record):
         row = {}
@@ -84,9 +84,10 @@ def export_flow(fieldnames: str):
     start_index = 0
     total_nr_of_results = float("inf")
     parsed = make_api_call.submit(start_index)
-    rows = write_record.map(parsed.result()["MediaDataList"], unmapped(fieldnames), writer)
+    rows = write_record.map(parsed.result()["MediaDataList"], unmapped(fieldnames))
     for row in rows:
         if row.result():
+            print(row.result())
             writer.writerow(row.result())
         # writer.writerow(row.result())
     total_nr_of_results = parsed.result()["TotalNrOfResults"]
@@ -107,7 +108,7 @@ def export_flow(fieldnames: str):
 
         # for record in parsed.result()["MediaDataList"]:
         for api_call_result in parseds:
-            write_record.map(api_call_result.result()["MediaDataList"], unmapped(fieldnames))
+            write_record.map(api_call_result.result()["MediaDataList"], )
         #     if row:
         #         rows.append(row.result())
         # for row in rows:
