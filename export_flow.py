@@ -28,6 +28,7 @@ def ie_classification(record):
 
 @task
 def write_record(record, fieldnames, writer):
+    print(record)
     if ie_classification(record):
         row = {}
         for field in fieldnames:
@@ -78,8 +79,9 @@ def export_flow(fieldnames):
     start_index = 0
     total_nr_of_results = float("inf")
     parsed = make_api_call.submit(start_index)
-    row = write_record.map(parsed.result()["MediaDataList"], fieldnames, writer)
-    writer.writerow(row)
+    rows = write_record.map(parsed.result()["MediaDataList"], fieldnames, writer)
+    for row in rows:
+        writer.writerow(row)
     total_nr_of_results = parsed.result()["TotalNrOfResults"]
     max_start_index = int(total_nr_of_results / 25)
     print(max_start_index)
