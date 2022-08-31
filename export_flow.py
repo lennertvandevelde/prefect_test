@@ -112,6 +112,6 @@ writer.writeheader()
 
 if __name__ == '__main__':
 
-    export_flow(fieldnames)
+    export_flow()
 
 csvfile.close()
