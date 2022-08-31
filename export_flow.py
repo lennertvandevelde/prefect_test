@@ -73,6 +73,7 @@ def make_api_call(start_index):
 @flow(name="export_flow")
 def export_flow(fieldnames):
     csvfile=open('/home/lennert/prefect_test/test.csv', 'w')
+    csvfile.write("\t".join(fieldnames) + "\n")
     print(os.path.abspath(csvfile.name))
     writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
     writer.writeheader()
